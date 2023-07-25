@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../_models/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AccountService {
   //ovaj servis sse koristi za slanje zahteva serveru prilikom prijavljivanja
   // servise koristimo da saljemo http zahteve da bismo ih izdvojili, iako je to moguce uraditi iz komponente
 
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
   //kreiramo observable da bi drugi delovi klijentske aplikacije mogli da imaju informaciju o tome da li je korisnik prijavljen i koristimo specijalan tip Observable objekta koje se zove BehaviorSubject pomocu koga observable moze da ima inicijalnu vrednost
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
